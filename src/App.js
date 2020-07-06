@@ -10,12 +10,12 @@ class App extends Component {
     items: [],
     id: uuidv4(),
     item: "",
-    editItem: false
+    editItem: false,
   }
 
   handleChange = e => {
     this.setState({
-      item: e.target.value
+      item: e.target.value,
     })
   }
 
@@ -23,13 +23,19 @@ class App extends Component {
     e.preventDefault()
     const newItem = {
       id: this.state.id,
-      title: this.state.item
+      title: this.state.item,
     }
     const updatedItems = [...this.state.items, newItem]
 
-    this.setState({
-      items: updatedItems
-    })
+    this.setState(
+      {
+        items: updatedItems,
+        item: "",
+        id: uuidv4(),
+        editItem: false,
+      },
+      () => console.log(this.state)
+    )
   }
 
   clearList = () => {
