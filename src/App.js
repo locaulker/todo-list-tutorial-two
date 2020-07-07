@@ -10,12 +10,12 @@ class App extends Component {
     items: [],
     id: uuidv4(),
     item: "",
-    editItem: false,
+    editItem: false
   }
 
   handleChange = e => {
     this.setState({
-      item: e.target.value,
+      item: e.target.value
     })
   }
 
@@ -23,36 +23,40 @@ class App extends Component {
     e.preventDefault()
     const newItem = {
       id: this.state.id,
-      title: this.state.item,
+      title: this.state.item
     }
     const updatedItems = [...this.state.items, newItem]
 
-    this.setState(
-      {
-        items: updatedItems,
-        item: "",
-        id: uuidv4(),
-        editItem: false,
-      },
-      () => console.log(this.state)
-    )
+    this.setState({
+      items: updatedItems,
+      item: "",
+      id: uuidv4(),
+      editItem: false
+    })
   }
 
   clearList = () => {
     this.setState({
-      items: [],
+      items: []
     })
   }
 
   handleDelete = id => {
     const filteredItems = this.state.items.filter(item => item.id !== id)
     this.setState({
-      items: filteredItems,
+      items: filteredItems
     })
   }
 
   handleEdit = id => {
-    console.log(`handle edit ${id}`)
+    const filteredItems = this.state.items.filter(item => item.id !== id)
+    const selectedItem = this.state.items.find(item => item.id === id)
+    this.setState({
+      items: filteredItems,
+      item: selectedItem.title,
+      id: id,
+      editItem: true
+    })
   }
 
   render() {
